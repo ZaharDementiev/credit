@@ -20,6 +20,12 @@ class PaymentController extends Controller
         $this->tinkoff = new Tinkoff($api_url, $terminal, $secret_key);
     }
 
+    public function firstPaid()
+    {
+
+    }
+
+    ///////////////////////////////////////////////////////////////
     public function payment(Request $request, User $user)
     {
         return view('payment', compact('user'));
@@ -38,7 +44,8 @@ class PaymentController extends Controller
             'Taxation'      => 'usn_income',     //Налогооблажение
             'Phone'         => '89099998877',   //телефон покупателя
             'Name'          => 'Customer name', //Имя покупателя
-
+            'Recurrent'     => 'Y',
+            'CustomerKey'   => '',
         ];
 
         $items[] = [
@@ -49,10 +56,9 @@ class PaymentController extends Controller
 
 //Получение url для оплаты
         $paymentURL = $this->tinkoff->paymentURL($payment, $items);
-//        dd($paymentURL);
 
 //Контроль ошибок
-        if(!$paymentURL){
+        if (!$paymentURL) {
             echo($this->tinkoff->error);
         } else {
             $payment_id = $this->tinkoff->payment_id;

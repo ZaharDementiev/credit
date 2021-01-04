@@ -10,6 +10,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public const SUBSCRIBE_SUM = 399;
+    public const TO_DEBT = 100;
+
     /**
      * The attributes that are mass assignable.
      *
