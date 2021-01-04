@@ -23,3 +23,5 @@ Route::get('/unSubscribe', 'HomeController@unSubscribe')->name('unSubscribe');
 Route::get('/tinkoff', 'PaymentController@link');
 Route::get('/cancel/{id}', 'PaymentController@cancel');
 Route::any('/status', 'PaymentController@status')->name('status');
+
+Route::post('/savedata', 'HomeController@saveData')->name('save.data');

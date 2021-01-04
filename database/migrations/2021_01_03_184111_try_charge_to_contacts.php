@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentsTable extends Migration
+class TryChargeToContacts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-
-            $table->timestamps();
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->integer('try_number')->default(0);
         });
     }
 
@@ -27,6 +25,8 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::table('contacts', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -28,7 +28,7 @@
         <div class="container">
             <div class="header__row">
                 <div class="header__logo">
-                    <a href="#" class="header__img">
+                    <a href="{{route('index')}}" class="header__img">
                         <svg width="213" height="55" viewBox="0 0 213 55" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -133,14 +133,14 @@
                                 href="pdf/for_the_processing_of_personal_data.pdf" target="_blank">на обработку
                                 персональных данных</a>.
                             Режим работы службы поддержки: 10:00 - 19:00, без выходных. По всем интересующим вопросам Вы
-                            можете обратится через <a href="call_back.html">форму обратной связи</a>, e-mail службы
+                            можете обратится через <a href="{{route('callBack')}}">форму обратной связи</a>, e-mail службы
                             поддержки сервиса
                             <a href="mailto:support@zaemnakarty.ru" target="_blank">support@zaemnakarty.ru</a> или в
                             телеграм <a href="https://t.me/zaemnakartunow" target="_blank">@zaemnakartunow</a>
                             Стоимость услуги - 398 (триста девяносто восемь) рублей. Стоимость платной подписки - 398
                             (триста девяносто восемь) рублей каждые пять дней. Наличие платной подписки не
                             гарантирует Вам получение займа. Клиент может отказаться от платной услуги подбора займов
-                            самостоятельно, в любое время - <a href="unSubscribe.html">Отменить подписку</a>.
+                            самостоятельно, в любое время - <a href="{{route('unSubscribe')}}">Отменить подписку</a>.
                         </p>
                         <div class="bottom__row">
                             <div class="bottom__column">
@@ -156,8 +156,8 @@
                             </div>
                             <div class="bottom__column">
                                 <div class="bottom__item">
-                                    <a href="call_back.html" class="bottom__btn">Обратный звонок</a>
-                                    <a href="unNewsletters.html" class="bottom__btn">Отписаться от SMS рассылки</a>
+                                    <a href="{{route('callBack')}}" class="bottom__btn">Обратный звонок</a>
+                                    <a href="{{route('unNewsletters')}}" class="bottom__btn">Отписаться от SMS рассылки</a>
                                 </div>
                             </div>
                             <div class="bottom__column">
