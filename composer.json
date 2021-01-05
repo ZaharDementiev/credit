@@ -14,7 +14,8 @@
         "guzzlehttp/guzzle": "^6.3",
         "kenvel/laravel-tinkoff": "dev-master",
         "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "yoomoney/yookassa-sdk-php": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

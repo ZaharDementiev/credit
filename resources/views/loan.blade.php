@@ -307,7 +307,7 @@
                                     </svg>
                                     Назад
                                 </a>
-                                <btn class="button" data-href="#step-6" id="progressBarBtn" disable="disable">Продолжить</btn>
+                                <btn class="button" data-href="#step-6" id="progressBarBtn" >Продолжить</btn>
                             </div>
                         </div>
                     </div>
