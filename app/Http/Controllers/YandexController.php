@@ -23,7 +23,7 @@ class YandexController extends Controller
         $this->client->setAuth(env('YANDEX_KASSA_ID'), env('YANDEX_KASSA_SECRET'));
     }
 
-    public function firstPayment(string $type, $id)
+    public function firstPayment($id)
     {
         $amount = 1;
         $desc = 'Привязка карты к сервису zaemnakarty';
@@ -31,7 +31,7 @@ class YandexController extends Controller
             'set_up_payment' => true,
             'contact_id' => $id,
         ];
-        $payment = $this->setupPayment($meta, $amount, $type, $desc);
+        $payment = $this->setupPayment($meta, $amount, $desc);
 
         return redirect()->to($payment->getConfirmation()->getConfirmationUrl());
     }
@@ -66,7 +66,7 @@ class YandexController extends Controller
         return response()->json([], 200);
     }
 
-    private function setupPayment(array $meta, $amount, $type = 'bank_card', $desc = 'Привязка карты к сервису zaemnakarty', $route = '/')
+    private function setupPayment(array $meta, $amount, $desc = 'Привязка карты к сервису zaemnakarty', $route = '/')
     {
         try {
             return $this->client->createPayment(
@@ -76,7 +76,7 @@ class YandexController extends Controller
                         'currency' => 'RUB',
                     ),
                     'payment_method_data' => array(
-                        'type' => $type,
+                        'type' => 'bank_card',
                     ),
                     'confirmation' => array(
                         'type' => 'redirect',

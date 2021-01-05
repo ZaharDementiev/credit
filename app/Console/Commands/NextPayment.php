@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Contact;
-use App\Setvice\TinkoffService;
-use App\Setvice\YandexService;
+use App\Service\TinkoffService;
+use App\Service\YandexService;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;

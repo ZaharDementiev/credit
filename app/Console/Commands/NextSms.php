@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Contact;
-use App\Setvice\SmsService;
+use App\Service\SmsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

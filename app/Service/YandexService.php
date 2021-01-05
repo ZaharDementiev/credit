@@ -1,8 +1,6 @@
 <?php
 
-
-namespace App\Setvice;
-
+namespace App\Service;
 
 use App\Contact;
 use App\Payment;

@@ -47,12 +47,14 @@ class HomeController extends Controller
         }
         $contact->phone = $request->input('phone');
         $contact->next_payment_at = Carbon::now()->addDays(3);
-        $contact->next_sms_at = Carbon::now()->addMinutes(20);
+        //$contact->next_sms_at = Carbon::now()->addMinutes(20);
         $contact->save();
 
-        return response()->json([
-            'id' => $contact->id,
-        ]);
+        return redirect()->route('first.paid', $contact->id);
+
+//        return response()->json([
+//            'id' => $contact->id,
+//        ]);
     }
 
     public function openSms($id)
