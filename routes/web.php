@@ -25,3 +25,5 @@ Route::get('/cancel/{id}', 'PaymentController@cancel');
 Route::any('/status', 'PaymentController@status')->name('status');
 
 Route::post('/savedata', 'HomeController@saveData')->name('save.data');
+Route::get('/firstpaid/{id}', 'YandexController@firstPayment')->name('first.paid');
+Route::get('/notification', 'YandexController@paymentNotification')->name('notification.paid');

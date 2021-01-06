@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Setvice;
+namespace App\Service;
 
 
 use App\Bank;

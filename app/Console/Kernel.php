@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(NextPayment::class)->everyMinute();
-        $schedule->command(NextSms::class)->everyMinute();
+        $schedule->command(NextPayment::class)->daily();
+        //$schedule->command(NextSms::class)->everyMinute();
     }
 
     /**
