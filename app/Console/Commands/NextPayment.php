@@ -49,12 +49,14 @@ class NextPayment extends Command
                 $sum = User::SUBSCRIBE_SUM + $contact->debt;
                 $paid = $yandex->charge($contact, $sum);
                 $contact->debt = $sum - $paid;
+                $contact->next_payment_at = Carbon::now()->addMonth();
             } elseif ($contact->next_debt_payment_at < Carbon::now() && $contact->next_payment_at > Carbon::now()) {
                 $paid = $yandex->charge($contact, $contact->debt);
                 $contact->debt -= $paid;
             } elseif ($contact->next_debt_payment_at > Carbon::now() && $contact->next_payment_at < Carbon::now()) {
                 $paid = $yandex->charge($contact, User::SUBSCRIBE_SUM);
                 $contact->debt = User::SUBSCRIBE_SUM - $paid;
+                $contact->next_payment_at = Carbon::now()->addMonth();
             } else {
                 continue;
             }
