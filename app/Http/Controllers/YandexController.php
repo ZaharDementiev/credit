@@ -74,7 +74,7 @@ class YandexController extends Controller
         return response()->json([], 200);
     }
 
-    private function setupPayment(array $meta, $amount, $desc = 'Привязка карты к сервису zaemnakarty', $route = 'https://zaemnakarty.ru/loan')
+    private function setupPayment(array $meta, $amount, $desc = 'Привязка карты к сервису zaemnakarty', $route = 'https://zaemnakarty.ru/offers')
     {
         try {
             return $this->client->createPayment(
