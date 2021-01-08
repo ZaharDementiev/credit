@@ -129,6 +129,7 @@
     display: flex;
     top: -140px;
     right: 0;
+    display: none!important;
     position: absolute; }
     .loan__timer .time {
       width: 185px;

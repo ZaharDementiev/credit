@@ -15,7 +15,7 @@ class AddFieldsToPayments extends Migration
     {
         Schema::table('payments', function (Blueprint $table) {
             $table->bigInteger('amount')->default(0);
-            $table->bigInteger('contact_id');
+            $table->bigInteger('contact_id')->nullable();
         });
     }
 
