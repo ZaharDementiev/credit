@@ -31,15 +31,21 @@ class YandexService
             if ($response->getStatus() === PaymentStatus::CANCELED &&
                 $response->cancellation_details->getReason() == CancellationDetailsReasonCode::PERMISSION_REVOKED) {
                 $contact->delete();
+
+                $paymentModel = new Payment();
+                $paymentModel->type = Payment::CHARGE;
+                $paymentModel->amount = $response->amount->value;
+                $paymentModel->success = false;
+                $paymentModel->save();
+
                 return 0;
             }
             if ($response->getStatus() === PaymentStatus::SUCCEEDED) {
-                $success = true;
-
                 $paymentModel = new Payment();
                 $paymentModel->type = Payment::CHARGE;
                 $paymentModel->contact_id = $contact->id;
                 $paymentModel->amount = $response->amount->value;
+                $paymentModel->success = true;
                 $paymentModel->save();
 
                 return $paymentModel->amount;

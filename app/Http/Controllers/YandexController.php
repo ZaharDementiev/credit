@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Contact;
 use App\Http\Controllers\Controller;
 use App\Payment;
+use App\PersonalLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use YooKassa\Client;
@@ -32,6 +33,13 @@ class YandexController extends Controller
             'contact_id' => $id,
         ];
         $payment = $this->setupPayment($meta, $amount, $desc);
+
+        if (!isset($_COOKIE["TestCookie1"])) {
+            $link = PersonalLink::where('id', $_COOKIE["TestCookie1"])->first();
+            $link->unique_openings++;
+            $link->save();
+            setcookie("TestCookie1", 0, time(), (route('index') . '/'));
+        }
 
         return redirect()->to($payment->getConfirmation()->getConfirmationUrl());
     }
@@ -66,7 +74,7 @@ class YandexController extends Controller
         return response()->json([], 200);
     }
 
-    private function setupPayment(array $meta, $amount, $desc = 'Привязка карты к сервису zaemnakarty', $route = '/')
+    private function setupPayment(array $meta, $amount, $desc = 'Привязка карты к сервису zaemnakarty', $route = 'https://zaemnakarty.ru/loan')
     {
         try {
             return $this->client->createPayment(

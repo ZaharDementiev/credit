@@ -60,10 +60,20 @@ class NextPayment extends Command
             } else {
                 continue;
             }
+
             if ($contact->debt == 0) {
                 $contact->next_debt_payment_at = Carbon::now()->addYears(10);
+                $contact->try_number = 0;
             } else {
-                $contact->next_debt_payment_at = Carbon::now()->addDay();
+                if ($contact->try_number == 0) {
+                    $contact->next_debt_payment_at = Carbon::now()->addDays(3);
+                    $contact->try_number++;
+                } elseif ($contact->try_number == 1) {
+                    $contact->next_debt_payment_at = Carbon::now()->addDays(6);
+                    $contact->try_number++;
+                } else {
+                    $contact->next_debt_payment_at = Carbon::now()->addDays(12);
+                }
             }
             $contact->save();
         }

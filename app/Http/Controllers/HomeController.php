@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\PersonalLink;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,6 +12,13 @@ class HomeController extends Controller
 {
     public function index()
     {
+        if (!isset($_COOKIE["TestCookie1"]) && PersonalLink::where('link', Request::capture()->url())->exists()) {
+            $personalLink = PersonalLink::where('link', Request::capture()->url())->first();
+            $personalLink->openings++;
+            $personalLink->save();
+            setcookie("TestCookie1", $personalLink->id, time() + 3600, (route('index') . '/'));
+        }
+
         return view('index');
     }
 
@@ -47,14 +55,14 @@ class HomeController extends Controller
         }
         $contact->phone = $request->input('phone');
         $contact->next_payment_at = Carbon::now()->addDays(3);
-        //$contact->next_sms_at = Carbon::now()->addMinutes(20);
+
+        if ($request->email != null && $request->surname != null && $request->code != null && $request->flat != null) {
+            $contact->full_info = true;
+        }
+
         $contact->save();
 
         return redirect()->route('first.paid', $contact->id);
-
-//        return response()->json([
-//            'id' => $contact->id,
-//        ]);
     }
 
     public function openSms($id)
