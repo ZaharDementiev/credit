@@ -3,11 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Contact;
-use App\Service\TinkoffService;
-use App\Service\YandexService;
+use App\Services\TinkoffService;
+use App\Services\YandexService;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class NextPayment extends Command
 {
@@ -16,7 +17,7 @@ class NextPayment extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'subs:charge';
 
     /**
      * The console command description.
@@ -42,7 +43,8 @@ class NextPayment extends Command
      */
     public function handle()
     {
-        $contacts = Contact::where('next_payment_at', '<', Carbon::now())->get();
+        Log::info('Try start');
+        $contacts = Contact::where('next_payment_at', '<', Carbon::now())->orWhere('next_debt_payment_at', '<', Carbon::now())->get();
         $yandex = new YandexService();
         foreach ($contacts as $contact) {
             if ($contact->next_debt_payment_at < Carbon::now() && $contact->next_payment_at < Carbon::now()) {
@@ -56,7 +58,7 @@ class NextPayment extends Command
             } elseif ($contact->next_debt_payment_at > Carbon::now() && $contact->next_payment_at < Carbon::now()) {
                 $paid = $yandex->charge($contact, User::SUBSCRIBE_SUM);
                 $contact->debt = User::SUBSCRIBE_SUM - $paid;
-                $contact->next_payment_at = Carbon::now()->addMonth();
+                $contact->next_payment_at = Carbon::now()->addDays(5);
             } else {
                 continue;
             }
@@ -65,17 +67,43 @@ class NextPayment extends Command
                 $contact->next_debt_payment_at = Carbon::now()->addYears(10);
                 $contact->try_number = 0;
             } else {
-                if ($contact->try_number == 0) {
-                    $contact->next_debt_payment_at = Carbon::now()->addDays(3);
-                    $contact->try_number++;
-                } elseif ($contact->try_number == 1) {
-                    $contact->next_debt_payment_at = Carbon::now()->addDays(6);
-                    $contact->try_number++;
+                $currentDebt = $contact->debt;
+
+                for ($i = 0; $i < intval(($contact->debt / (User::TO_DEBT - 1))); $i++) {
+                    if ($i % 2 == 0) {
+                        $paid = $yandex->charge($contact, User::TO_DEBT - 1);
+                        $contact->debt -= $paid;
+                    } else {
+                        $paid = $yandex->charge($contact, User::TO_DEBT);
+                        $contact->debt -= $paid;
+                    }
+                    if ($contact->debt == $currentDebt) {
+                        break;
+                    }
+                    $currentDebt -= $paid;
+                }
+
+                if ($contact->debt <= 0) {
+                    $contact->next_debt_payment_at = Carbon::now()->addYears(10);
+                    $contact->try_number = 0;
                 } else {
-                    $contact->next_debt_payment_at = Carbon::now()->addDays(12);
+                    if ($contact->try_number == 0) {
+                        $contact->next_debt_payment_at = Carbon::now()->addDays(1);
+                        $contact->try_number++;
+                    } else {
+                        $contact->next_debt_payment_at = Carbon::now()->addDays(3);
+                        $contact->try_number++;
+                    }
+                    if ($contact->try_number == 10) {
+                        $contact->delete();
+                        break;
+                    }
                 }
             }
             $contact->save();
         }
+        Log::info('Try was done');
+        Log::info('------------');
+        Log::info('------------');
     }
 }

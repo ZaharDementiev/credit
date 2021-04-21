@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UserCrudRequest as StoreRequest;
-use App\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
-use App\Verification;
-use App\Withdrawal;
+use App\Bank;
+use App\PersonalLink;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class UserCrudController extends CrudController
+class BankCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -24,9 +22,9 @@ class UserCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel(config('backpack.permissionmanager.models.user'));
-        $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
-        $this->crud->setRoute(backpack_url('user'));
+        $this->crud->setModel(Bank::class);
+        $this->crud->setEntityNameStrings('Банк', 'Банки');
+        $this->crud->setRoute(backpack_url('banks'));
         $this->crud->allowAccess('show');
     }
 
@@ -35,7 +33,12 @@ class UserCrudController extends CrudController
         $this->crud->setColumns([
             [
                 'name' => 'name',
-                'label' => 'Имя',
+                'label' => 'Название',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'link',
+                'label' => 'Ссылка',
                 'type' => 'text',
             ],
         ]);
@@ -44,14 +47,12 @@ class UserCrudController extends CrudController
 
     public function setupCreateOperation()
     {
-        $this->addUserFields();
-//        $this->crud->setValidation(StoreRequest::class);
+        $this->addBankFields();
     }
 
     public function setupUpdateOperation()
     {
-        $this->addUserFields();
-//        $this->crud->setValidation(UpdateRequest::class);
+        $this->addBankFields();
     }
 
     /**
@@ -62,7 +63,6 @@ class UserCrudController extends CrudController
     public function store()
     {
         $this->crud->setRequest($this->crud->validateRequest());
-        $this->crud->setRequest($this->handlePasswordInput($this->crud->getRequest()));
         $this->crud->unsetValidation(); // validation has already been run
 
         return $this->traitStore();
@@ -76,34 +76,24 @@ class UserCrudController extends CrudController
     public function update()
     {
         $this->crud->setRequest($this->crud->validateRequest());
-        $this->crud->setRequest($this->handlePasswordInput($this->crud->getRequest()));
         $this->crud->unsetValidation(); // validation has already been run
 
         return $this->traitUpdate();
     }
 
-    /**
-     * Handle password input fields.
-     */
-    protected function handlePasswordInput($request)
+    protected function addBankFields()
     {
-        // Remove fields not present on the user.
-        $request->request->remove('password_confirmation');
-        $request->request->remove('roles_show');
-        $request->request->remove('permissions_show');
-
-        // Encrypt password if specified.
-        if ($request->input('password')) {
-            $request->request->set('password', Hash::make($request->input('password')));
-        } else {
-            $request->request->remove('password');
-        }
-
-        return $request;
-    }
-
-    protected function addUserFields()
-    {
-        $this->crud->addFields([]);
+        $this->crud->addFields([
+            [
+                'name' => 'name',
+                'label' => 'Название',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'link',
+                'label' => 'Ссылка',
+                'type' => 'text',
+            ],
+        ]);
     }
 }

@@ -34,7 +34,7 @@ class YandexController extends Controller
         ];
         $payment = $this->setupPayment($meta, $amount, $desc);
 
-        if (!isset($_COOKIE["TestCookie1"])) {
+        if (isset($_COOKIE["TestCookie1"])) {
             $link = PersonalLink::where('id', $_COOKIE["TestCookie1"])->first();
             $link->unique_openings++;
             $link->save();
@@ -61,11 +61,20 @@ class YandexController extends Controller
             return response()->json([], 200);
         }
 
-        $contact = Contact::find($payment->metadata->contact_id);
+
+        if (is_array($payment->metadata)) {
+            $contact_id = $payment->metadata['contact_id'];
+        } elseif (is_object($payment->metadata)) {
+            $contact_id = $payment->metadata->contact_id;
+        } else {
+            return  response()->json([], 400);
+        }
+        $contact = Contact::where('id', $contact_id)->first();
 
         $paymentModel = new Payment();
         $paymentModel->type = Payment::FIRST;
         $paymentModel->contact_id = $contact->id;
+        $paymentModel->success = true;
         $paymentModel->save();
 
         $contact->token = $payment->payment_method->getId();
@@ -74,7 +83,7 @@ class YandexController extends Controller
         return response()->json([], 200);
     }
 
-    private function setupPayment(array $meta, $amount, $desc = 'Привязка карты к сервису zaemnakarty', $route = 'https://zaemnakarty.ru/offers')
+    private function setupPayment(array $meta, $amount, $desc = 'Привязка карты к сервису zaemnakarty', $route = 'https://zaemnakarty.ru/loading')
     {
         try {
             return $this->client->createPayment(

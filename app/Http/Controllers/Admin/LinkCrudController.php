@@ -26,7 +26,6 @@ class LinkCrudController extends CrudController
         $this->crud->setRoute(backpack_url('links'));
         $this->crud->allowAccess('show');
         $this->crud->denyAccess('create');
-        $this->crud->denyAccess('update');
 
         $this->crud->addButtonFromView('top', 'generate', 'generate', 'beginning');
     }
@@ -40,14 +39,36 @@ class LinkCrudController extends CrudController
                 'type' => 'text',
             ],
             [
-                'name' => 'openings',
-                'label' => 'Обычных открытий',
-                'type' => 'number',
+                'name' => 'name',
+                'label' => 'Название',
+                'type' => 'text',
             ],
             [
-                'name' => 'unique_openings',
+                'name' => 'stat',
+                'label' => 'Статистика',
+                'type' => 'model_function',
+                'function_name' => 'statistic',
+                'limit' => 1000,
+            ],
+            [
+                'name' => 'thisOpenings',
+                'label' => 'Обычных открытий',
+                'type' => 'model_function',
+                'function_name' => 'linkOpenings',
+                'limit' => 1000,
+            ],
+            [
+                'name' => 'thisUnique_openings',
                 'label' => 'Уникальных открытий',
-                'type' => 'number',
+                'type' => 'model_function',
+                'function_name' => 'linkUniqueOpenings',
+                'limit' => 1000,
+            ],
+            [
+                'name' => 'sms_link',
+                'label' => 'Для СМС рассылки',
+                'type' => 'boolean',
+                'options' => [0 => 'Нет', 1 => 'Да']
             ],
         ]);
 
@@ -55,14 +76,12 @@ class LinkCrudController extends CrudController
 
     public function setupCreateOperation()
     {
-        $this->addUserFields();
-//        $this->crud->setValidation(StoreRequest::class);
+        $this->addLinkFields();
     }
 
     public function setupUpdateOperation()
     {
-        $this->addUserFields();
-//        $this->crud->setValidation(UpdateRequest::class);
+        $this->addLinkFields();
     }
 
     /**
@@ -113,9 +132,21 @@ class LinkCrudController extends CrudController
         return $request;
     }
 
-    protected function addUserFields()
+    protected function addLinkFields()
     {
-        $this->crud->addFields([]);
+        $this->crud->addFields([
+            [
+                'name' => 'name',
+                'label' => 'Название',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'sms_link',
+                'label' => 'Для СМС рассылки',
+                'type' => 'boolean',
+                'options' => [0 => 'Нет', 1 => 'Да']
+            ],
+        ]);
     }
 
     public function generate()
@@ -124,5 +155,10 @@ class LinkCrudController extends CrudController
         $personalLink->link = route('index') . '/' . Str::random();
         $personalLink->save();
         return redirect()->back();
+    }
+
+    public function stat($id)
+    {
+        return view(backpack_view('stat'), compact('id'));
     }
 }
