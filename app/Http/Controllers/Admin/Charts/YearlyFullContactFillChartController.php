@@ -20,6 +20,7 @@ class YearlyFullContactFillChartController extends ChartController
             $data->push(Contact::whereBetween('created_at', [Carbon::now()->subMonths($days_backwards)->startOfMonth(),
                 Carbon::now()->subMonths($days_backwards)->endOfMonth()])
                 ->where('full_info', true)
+                ->where('token', '!=', null)
                 ->count());
             $days->push(Carbon::today()->subMonths($days_backwards)->format('m.y'));
         }

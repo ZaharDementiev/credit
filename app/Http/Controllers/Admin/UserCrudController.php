@@ -32,7 +32,13 @@ class UserCrudController extends CrudController
 
     public function setupListOperation()
     {
-        $this->crud->setColumns([]);
+        $this->crud->setColumns([
+            [
+                'name' => 'name',
+                'label' => 'Имя',
+                'type' => 'text',
+            ],
+        ]);
 
     }
 

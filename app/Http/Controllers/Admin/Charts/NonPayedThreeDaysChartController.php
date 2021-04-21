@@ -29,7 +29,7 @@ class NonPayedThreeDaysChartController extends ChartController
 
         $this->chart = new Chart();
         $this->chart->labels($days);
-        $this->chart->dataset('Получено', 'line', $data)
+        $this->chart->dataset('Не получено', 'line', $data)
             ->color('rgb(77, 189, 116)')
             ->backgroundColor('rgba(77, 189, 116, 0.4)');
     }

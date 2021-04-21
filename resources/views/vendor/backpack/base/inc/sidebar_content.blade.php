@@ -9,4 +9,8 @@
     </ul>
 </li>
 
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('offers') }}"><i class="nav-icon la la-building-o"></i> <span>Офферы</span></a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('links') }}"><i class="nav-icon la la-chain"></i> <span>Ссылки</span></a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('banks') }}"><i class="nav-icon la la-bank"></i> <span>Банки</span></a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('texts') }}"><i class="nav-icon la la-book"></i> <span>Тексты</span></a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('withdrawals') }}"><i class="nav-icon la la-money-bill-wave"></i> <span>Выводы</span></a></li>

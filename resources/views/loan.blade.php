@@ -15,10 +15,32 @@
             </div>
             <div class="loan__steps">
                 <div class="loan__steps-list">
+                    <div class="mob_title">Шаг первый</div>
                     <ul>
                         <li class="active" id="step-1ul"><span>1</span></li>
+                        <li class="line" data-step="1">
+                            <div class="svgWrapp">
+                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.66177 1.07083L8.42078 0.863796C8.02076 0.520043 7.41965 0.55836 7.06649 0.949992L3.03508 5.42003L1.81819 4.37196C1.41859 4.02782 0.817391 4.06537 0.463802 4.45658L0.250727 4.69236C0.0779334 4.88345 -0.011785 5.13552 0.00124423 5.393C0.014402 5.65034 0.129206 5.89193 0.32059 6.06465L2.55122 8.10734C2.74435 8.2887 3.00317 8.38328 3.26772 8.36924C3.53227 8.35524 3.77961 8.2337 3.95242 8.03289L8.7649 2.44111C8.93303 2.24575 9.01662 1.99162 8.99724 1.73467C8.97788 1.47753 8.85724 1.23878 8.66177 1.07083Z" fill="#4892F3"/>
+                                </svg>
+                            </div>
+                        </li>
                         <li id="step-2ul"><span>2</span></li>
+                        <li class="line" data-step="2">
+                            <div class="svgWrapp">
+                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.66177 1.07083L8.42078 0.863796C8.02076 0.520043 7.41965 0.55836 7.06649 0.949992L3.03508 5.42003L1.81819 4.37196C1.41859 4.02782 0.817391 4.06537 0.463802 4.45658L0.250727 4.69236C0.0779334 4.88345 -0.011785 5.13552 0.00124423 5.393C0.014402 5.65034 0.129206 5.89193 0.32059 6.06465L2.55122 8.10734C2.74435 8.2887 3.00317 8.38328 3.26772 8.36924C3.53227 8.35524 3.77961 8.2337 3.95242 8.03289L8.7649 2.44111C8.93303 2.24575 9.01662 1.99162 8.99724 1.73467C8.97788 1.47753 8.85724 1.23878 8.66177 1.07083Z" fill="#4892F3"/>
+                                </svg>
+                            </div>
+                        </li>
                         <li id="step-3ul"><span>3</span></li>
+                        <li class="line" data-step="3">
+                            <div class="svgWrapp">
+                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.66177 1.07083L8.42078 0.863796C8.02076 0.520043 7.41965 0.55836 7.06649 0.949992L3.03508 5.42003L1.81819 4.37196C1.41859 4.02782 0.817391 4.06537 0.463802 4.45658L0.250727 4.69236C0.0779334 4.88345 -0.011785 5.13552 0.00124423 5.393C0.014402 5.65034 0.129206 5.89193 0.32059 6.06465L2.55122 8.10734C2.74435 8.2887 3.00317 8.38328 3.26772 8.36924C3.53227 8.35524 3.77961 8.2337 3.95242 8.03289L8.7649 2.44111C8.93303 2.24575 9.01662 1.99162 8.99724 1.73467C8.97788 1.47753 8.85724 1.23878 8.66177 1.07083Z" fill="#4892F3"/>
+                                </svg>
+                            </div>
+                        </li>
                         <li id="step-4ul"><span>4</span></li>
                     </ul>
                 </div>
@@ -26,34 +48,40 @@
                         <form action="{{route('save.data')}}" method="post" class="form">
                             @csrf
                             <div id="step-1" class="step active">
-                            <h2>КОНТАКТНАЯ ИНФОРМАЦИЯ</h2>
-                            <div class="step__name">Шаг первый</div>
+                                <h2>КОНТАКТНАЯ ИНФОРМАЦИЯ</h2>
+                                <div class="step__name">Шаг первый</div>
                                 <div class="form__groupsTWO">
                                     <div class="form__group">
                                         <label>Номер телефона <span>*</span></label>
-                                        <input type="tel" name="phone" id="phoneX" placeholder="+7">
+                                        <input type="tel" name="phone" id="phoneX" placeholder="+7" inputmode="numeric">
                                     </div>
                                     <div class="form__group">
                                         <label>E-mail</label>
-                                        <input type="text" name="email" placeholder="E-mail (необязательно)">
+                                        <input type="text" name="email" id="emailX" placeholder="E-mail">
                                     </div>
                                 </div>
                                 <div class="form__checkInfo">
-                                    <input type="checkbox" class="checkbox" id="checkbox" name="info"/>
+                                    <input type="checkbox" class="checkbox" checked id="checkbox" name="info"/>
                                     <label for="checkbox">
-                                        Даю свое согласие на <a href="pdf/for_the_processing_of_personal_data.pdf" target="_blank">обработку персональных данных</a> и <a href="pdf/to_receive_promotional_materials.pdf" target="_blank">на получение рекламных материалов</a>, соглашаюсь с <a href="pdf/application-service_rates.pdf" target="_blank">условиями публичной оферты и тарифами сервиса</a>. Осознаю, что оплата услуг не гарантирует получение займа.
+                                        <div class="mob">Я согласен *</div>
+                                        <p>
+                                            <span class="desc">Даю свое согласие </span>
+                                            <span class="mob">* Согласие </span>
+                                            на <a href="pdf/for_the_processing_of_personal_data.pdf" target="_blank">обработку персональных данных</a> и <a href="pdf/new.pdf" target="_blank">на получение рекламных материалов</a>, соглашаюсь с <a href="pdf/application-service_rates.pdf" target="_blank">условиями публичной оферты и тарифами сервиса</a>. Осознаю, что оплата услуг не гарантирует получение займа.
+                                        </p>
                                     </label>
                                 </div>
                                 <div class="form__footer">
-                                    <a href="{{route('index')}}"  class="black">
-                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10.125 5.62497H2.64394L5.50856 2.89647C5.65856 2.75359 5.66437 2.51622 5.5215 2.36622C5.37881 2.21641 5.14144 2.21041 4.99125 2.35328L1.71975 5.46953C1.57819 5.61128 1.5 5.79953 1.5 5.99997C1.5 6.20022 1.57819 6.38866 1.72631 6.53659L4.99144 9.64647C5.064 9.71566 5.157 9.74997 5.25 9.74997C5.349 9.74997 5.448 9.71097 5.52169 9.63353C5.66456 9.48353 5.65875 9.24634 5.50875 9.10347L2.63213 6.37497H10.125C10.332 6.37497 10.5 6.20697 10.5 5.99997C10.5 5.79297 10.332 5.62497 10.125 5.62497Z" fill="#828282"/>
+                                    <a href="index.html"  class="black">
+                                        <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.335659 8.68422L7.9195 1.10021C8.13599 0.883721 8.42452 0.764893 8.73217 0.764893C9.04017 0.764893 9.32854 0.883892 9.54502 1.10021L10.2336 1.78893C10.4499 2.00508 10.5691 2.29378 10.5691 2.60161C10.5691 2.90927 10.4499 3.2077 10.2336 3.42385L5.80927 7.85788H19.8655C20.4992 7.85788 21 8.35403 21 8.98795V9.96162C21 10.5955 20.4992 11.1417 19.8655 11.1417H5.75908L10.2334 15.6005C10.4497 15.817 10.5689 16.0978 10.5689 16.4057C10.5689 16.7132 10.4497 16.9981 10.2334 17.2144L9.54485 17.9009C9.32836 18.1174 9.04 18.2354 8.732 18.2354C8.42435 18.2354 8.13581 18.1159 7.91933 17.8994L0.335487 10.3155C0.11849 10.0984 -0.000850677 9.80848 3.8147e-06 9.50031C-0.000679016 9.19112 0.11849 8.90105 0.335659 8.68422Z" fill="#4892F3" fill-opacity="0.5"/>
                                         </svg>
-                                        Назад
+                                        <span>Назад</span>
                                     </a>
-                                    <div  class="button" data-href="#step-2" id="btnStep1">ОТПРАВИТЬ</div>
+                                    <div class="button" data-href="#step-2" id="btnStep1">Далее</div>
                                 </div>
-                        </div>
+                            </div>
+                            
                             <div id="step-2" class="step">
                                 <h2>ЛИЧНЫЕ ДАННЫЕ</h2>
                                 <div class="step__name">Шаг второй</div>
@@ -73,25 +101,25 @@
                                         </div>
                                         <div class="form__group">
                                             <label>Дата рождения <span>*</span></label>
-                                            <input type="text" name="date" placeholder="ДД/ММ/ГГГГ" id="date">
+                                            <input type="text" inputmode="numeric" name="date" placeholder="ДД/ММ/ГГГГ" id="date">
                                         </div>
                                         <div class="form__group gender">
-                                            <label>Пол <span>*</span></label>
+                                            <label class="genderLabel">Пол <span>*</span></label>
                                             <div class="form__radio">
                                                 <input type="radio" class="radio" id="radio1" name="gender" checked/>
-                                                <label for="radio1">М</label>
+                                                <label for="radio1" class="male"><div>М</div></label>
                                             </div>
                                             <div class="form__radio">
                                                 <input type="radio" class="radio" id="radio2" name="gender" />
-                                                <label for="radio2">Ж</label>
+                                                <label for="radio2" class="female"><div>Ж</div></label>
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="form__groupsTWO">
+                                    <div class="form__groupsTWO select">
                                         <div class="form__group">
                                             <label>Сумма займа <span>*</span></label>
-                                            <input type="text" name="summDolg" placeholder="500000" id="summDolg">
+                                            <input type="text" name="summDolg" inputmode="numeric" placeholder="500000" id="summDolg">
                                         </div>
                                         <div class="form__group">
                                             <label>Цель займа</label>
@@ -105,123 +133,142 @@
                                         </div>
                                     </div>
                                     <div class="form__footer">
-                                        <a href="javascript:void(0)"  data-href="#step-1" class="black btn-stepsBlack">
-                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.125 5.62497H2.64394L5.50856 2.89647C5.65856 2.75359 5.66437 2.51622 5.5215 2.36622C5.37881 2.21641 5.14144 2.21041 4.99125 2.35328L1.71975 5.46953C1.57819 5.61128 1.5 5.79953 1.5 5.99997C1.5 6.20022 1.57819 6.38866 1.72631 6.53659L4.99144 9.64647C5.064 9.71566 5.157 9.74997 5.25 9.74997C5.349 9.74997 5.448 9.71097 5.52169 9.63353C5.66456 9.48353 5.65875 9.24634 5.50875 9.10347L2.63213 6.37497H10.125C10.332 6.37497 10.5 6.20697 10.5 5.99997C10.5 5.79297 10.332 5.62497 10.125 5.62497Z" fill="#828282"/>
+                                        <a href="javascript:void(0)" data-step="0" data-href="#step-1" class="black btn-stepsBlack">
+                                            <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M0.335659 8.68422L7.9195 1.10021C8.13599 0.883721 8.42452 0.764893 8.73217 0.764893C9.04017 0.764893 9.32854 0.883892 9.54502 1.10021L10.2336 1.78893C10.4499 2.00508 10.5691 2.29378 10.5691 2.60161C10.5691 2.90927 10.4499 3.2077 10.2336 3.42385L5.80927 7.85788H19.8655C20.4992 7.85788 21 8.35403 21 8.98795V9.96162C21 10.5955 20.4992 11.1417 19.8655 11.1417H5.75908L10.2334 15.6005C10.4497 15.817 10.5689 16.0978 10.5689 16.4057C10.5689 16.7132 10.4497 16.9981 10.2334 17.2144L9.54485 17.9009C9.32836 18.1174 9.04 18.2354 8.732 18.2354C8.42435 18.2354 8.13581 18.1159 7.91933 17.8994L0.335487 10.3155C0.11849 10.0984 -0.000850677 9.80848 3.8147e-06 9.50031C-0.000679016 9.19112 0.11849 8.90105 0.335659 8.68422Z" fill="#4892F3" fill-opacity="0.5"/>
                                             </svg>
-                                            Назад
+                                            <span>Назад</span>
                                         </a>
-                                        <div class="button" data-href="#step-3" id="btnStep2">ОТПРАВИТЬ</div>
+                                        <div class="button" data-href="#step-3" id="btnStep2">Далее</div>
                                     </div>
                             </div>
                             <div id="step-3" class="step">
                                 <h2>ПАСПОРТНЫЕ ДАННЫЕ</h2>
                                 <div class="step__name">Шаг третий</div>
-                                    <div class="form__groupsTREE">
-                                        <div class="form__group">
-                                            <label>Серия  <span>*</span></label>
-                                            <input type="text"  placeholder="_ _   _ _" id="series">
-                                        </div>
-                                        <div class="form__group">
-                                            <label>Номер <span>*</span></label>
-                                            <input type="text" placeholder="_ _ _   _ _ _" id="room">
-                                        </div>
-                                        <div class="form__group">
-                                            <label>Код подразделения</label>
-                                            <input name="code" type="text" placeholder="_ _ _ - _ _ _" id="codeSubdivisions">
-                                        </div>
+                                <div class="form__groupsTREE">
+                                    <div class="form__group">
+                                        <label>Серия </label>
+                                        <input type="text" inputmode="numeric"  placeholder="_ _   _ _" id="series">
                                     </div>
-                                    <div class="form__groupsTWO">
-                                        <div class="form__group">
-                                            <label>Место рождения <span>*</span></label>
-                                            <input type="text" name="placeBirth" id="placeBirth">
-                                        </div>
+                                    <div class="form__group">
+                                        <label>Номер</label>
+                                        <input type="text" inputmode="numeric" placeholder="_ _ _   _ _ _" id="room">
                                     </div>
-                                    <div class="form__footer">
-                                        <a href="javascript:void(0)" data-href="#step-2" class="black btn-stepsBlack">
-                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.125 5.62497H2.64394L5.50856 2.89647C5.65856 2.75359 5.66437 2.51622 5.5215 2.36622C5.37881 2.21641 5.14144 2.21041 4.99125 2.35328L1.71975 5.46953C1.57819 5.61128 1.5 5.79953 1.5 5.99997C1.5 6.20022 1.57819 6.38866 1.72631 6.53659L4.99144 9.64647C5.064 9.71566 5.157 9.74997 5.25 9.74997C5.349 9.74997 5.448 9.71097 5.52169 9.63353C5.66456 9.48353 5.65875 9.24634 5.50875 9.10347L2.63213 6.37497H10.125C10.332 6.37497 10.5 6.20697 10.5 5.99997C10.5 5.79297 10.332 5.62497 10.125 5.62497Z" fill="#828282"/>
-                                            </svg>
-                                            Назад
-                                        </a>
-                                        <div class="button" data-href="#step-4" id="btnStep3">ОТПРАВИТЬ</div>
+                                    <div class="form__group">
+                                        <label>Код подразделения</label>
+                                        <input name="code" inputmode="numeric" type="text" placeholder="_ _ _ - _ _ _" id="codeSubdivisions">
                                     </div>
+                                </div>
+                                <div class="form__groupsTWO">
+                                    <div class="form__group">
+                                        <label>Место рождения</label>
+                                        <input type="text" name="placeBirth" id="placeBirth">
+                                    </div>
+                                </div>
+                                <div class="form__footer">
+                                    <a href="javascript:void(0)" data-step="1" data-href="#step-2" class="black btn-stepsBlack">
+                                        <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.335659 8.68422L7.9195 1.10021C8.13599 0.883721 8.42452 0.764893 8.73217 0.764893C9.04017 0.764893 9.32854 0.883892 9.54502 1.10021L10.2336 1.78893C10.4499 2.00508 10.5691 2.29378 10.5691 2.60161C10.5691 2.90927 10.4499 3.2077 10.2336 3.42385L5.80927 7.85788H19.8655C20.4992 7.85788 21 8.35403 21 8.98795V9.96162C21 10.5955 20.4992 11.1417 19.8655 11.1417H5.75908L10.2334 15.6005C10.4497 15.817 10.5689 16.0978 10.5689 16.4057C10.5689 16.7132 10.4497 16.9981 10.2334 17.2144L9.54485 17.9009C9.32836 18.1174 9.04 18.2354 8.732 18.2354C8.42435 18.2354 8.13581 18.1159 7.91933 17.8994L0.335487 10.3155C0.11849 10.0984 -0.000850677 9.80848 3.8147e-06 9.50031C-0.000679016 9.19112 0.11849 8.90105 0.335659 8.68422Z" fill="#4892F3" fill-opacity="0.5"/>
+                                        </svg>
+                                        <span>Назад</span>
+                                    </a>
+                                    <div class="button" data-href="#step-5" id="btnStep3">Далее</div>
+                                </div>
                             </div>
-                            <div id="step-4" class="step">
+                            <!-- <div id="step-4" class="step">
                                 <h2>АДРЕС РЕГИСТРАЦИИ</h2>
                                 <div class="step__name">Шаг четвёртый</div>
+                                <div class="form__groupsTWO">
+                                    <div class="form__group">
+                                        <label>Регион <span>*</span></label>
+                                        <input type="text" id="region1" placeholder="Ваш регион">
+                                    </div>
+                                    <div class="form__group">
+                                        <label>Город <span>*</span></label>
+                                        <input type="text" id="city1" placeholder="Ваш город">
+                                    </div>
+                                </div>
+                                <div class="form__groupsTREE">
+                                    <div class="form__group">
+                                        <label>Улица <span>*</span></label>
+                                        <input type="text" id="street1" placeholder="Ваша улица">
+                                    </div>
+                                    <div class="form__group">
+                                        <label>Дом <span>*</span></label>
+                                        <input type="text" id="house1" placeholder="Дом">
+                                    </div>
+                                    <div class="form__group">
+                                        <label>Квартира <span>*</span></label>
+                                        <input name="flat" id="flat1" type="text" placeholder="Квартира">
+                                    </div>
+                                    <div class="form__group factic gender">
+                                        <label>Совпадает с фактическим?</label>
+                                        <div class="form__radio">
+                                            <input type="radio" class="radio radioDual" value="0" id="radio3" name="dual" checked/>
+                                            <label for="radio3" class="yes"><div>Да</div></label>
+                                        </div>
+                                        <div class="form__radio">
+                                            <input type="radio" class="radio radioDual" value="1" id="radio4" name="dual" />
+                                            <label for="radio4" class="no"><div>Нет</div></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="actual-info">
+                                    <h2>ФАКТИЧЕСКИЙ АДРЕС</h2>
                                     <div class="form__groupsTWO">
                                         <div class="form__group">
                                             <label>Регион <span>*</span></label>
-                                            <input type="text" id="region1">
+                                            <input type="text" id="region2" placeholder="Ваш регион">
                                         </div>
                                         <div class="form__group">
                                             <label>Город <span>*</span></label>
-                                            <input type="text" id="city1">
+                                            <input type="text"  id="city2" placeholder="Ваш город">
                                         </div>
                                     </div>
                                     <div class="form__groupsTREE">
                                         <div class="form__group">
                                             <label>Улица <span>*</span></label>
-                                            <input type="text" id="street1">
+                                            <input type="text" id="street2" placeholder="Ваша улица">
                                         </div>
                                         <div class="form__group">
-                                            <label>Дом  <span>*</span></label>
-                                            <input type="text" id="house1">
+                                            <label>Дом <span>*</span></label>
+                                            <input type="text" id="house2" placeholder="Дом">
                                         </div>
                                         <div class="form__group">
-                                            <label>Квартира</label>
-                                            <input name="flat" type="text">
-                                        </div>
-                                        <div class="form__group gender">
-                                            <label>Совпадает с фактическим? <span>*</span></label>
-                                            <div class="form__radio">
-                                                <input type="radio" class="radio radioDual" value="0" id="radio3" name="dual" checked/>
-                                                <label for="radio3">Да</label>
-                                            </div>
-                                            <div class="form__radio">
-                                                <input type="radio" class="radio radioDual" value="1" id="radio4" name="dual" />
-                                                <label for="radio4">Нет</label>
-                                            </div>
+                                            <label>Квартира <span>*</span></label>
+                                            <input type="text" id="flat2" placeholder="Квартира">
                                         </div>
                                     </div>
-                                    <div class="actual-info">
-                                        <h2>ФАКТИЧЕСКИЙ АДРЕС</h2>
-                                        <div class="form__groupsTWO">
-                                            <div class="form__group">
-                                                <label>Регион <span>*</span></label>
-                                                <input type="text" id="region2" >
-                                            </div>
-                                            <div class="form__group">
-                                                <label>Город <span>*</span></label>
-                                                <input type="text"  id="city2">
-                                            </div>
-                                        </div>
-                                        <div class="form__groupsTREE">
-                                            <div class="form__group">
-                                                <label>Улица <span>*</span></label>
-                                                <input type="text" id="street2">
-                                            </div>
-                                            <div class="form__group">
-                                                <label>Дом  <span>*</span></label>
-                                                <input type="text" id="house2">
-                                            </div>
-                                            <div class="form__group">
-                                                <label>Квартира</label>
-                                                <input type="text">
-                                            </div>
+                                </div>
+                                <div class="form__footer">
+                                    <a href="javascript:void(0)" data-href="#step-3" class="black btn-stepsBlack">
+                                        <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.335659 8.68422L7.9195 1.10021C8.13599 0.883721 8.42452 0.764893 8.73217 0.764893C9.04017 0.764893 9.32854 0.883892 9.54502 1.10021L10.2336 1.78893C10.4499 2.00508 10.5691 2.29378 10.5691 2.60161C10.5691 2.90927 10.4499 3.2077 10.2336 3.42385L5.80927 7.85788H19.8655C20.4992 7.85788 21 8.35403 21 8.98795V9.96162C21 10.5955 20.4992 11.1417 19.8655 11.1417H5.75908L10.2334 15.6005C10.4497 15.817 10.5689 16.0978 10.5689 16.4057C10.5689 16.7132 10.4497 16.9981 10.2334 17.2144L9.54485 17.9009C9.32836 18.1174 9.04 18.2354 8.732 18.2354C8.42435 18.2354 8.13581 18.1159 7.91933 17.8994L0.335487 10.3155C0.11849 10.0984 -0.000850677 9.80848 3.8147e-06 9.50031C-0.000679016 9.19112 0.11849 8.90105 0.335659 8.68422Z" fill="#4892F3" fill-opacity="0.5"/>
+                                        </svg>
+                                        <span>Назад</span>
+                                    </a>
+                                    <div class="button" data-href="#step-5" id="btnStep4">Отправить</div>
+                                </div>
+                            </div> -->
+                            <div id="step-5" class="step">
+                                <h2>Банковские реквизиты</h2>
+                                <div class="form">
+                                    <div class="form__desc">
+                                        <div class="text-new">
+                                            При одобрении, на вашу банковскую карту прийдут деньги, для этого вам необходимо привязать карту
                                         </div>
                                     </div>
-                                    <div class="form__footer">
-                                        <a href="javascript:void(0)" data-href="#step-3" class="black btn-stepsBlack">
-                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10.125 5.62497H2.64394L5.50856 2.89647C5.65856 2.75359 5.66437 2.51622 5.5215 2.36622C5.37881 2.21641 5.14144 2.21041 4.99125 2.35328L1.71975 5.46953C1.57819 5.61128 1.5 5.79953 1.5 5.99997C1.5 6.20022 1.57819 6.38866 1.72631 6.53659L4.99144 9.64647C5.064 9.71566 5.157 9.74997 5.25 9.74997C5.349 9.74997 5.448 9.71097 5.52169 9.63353C5.66456 9.48353 5.65875 9.24634 5.50875 9.10347L2.63213 6.37497H10.125C10.332 6.37497 10.5 6.20697 10.5 5.99997C10.5 5.79297 10.332 5.62497 10.125 5.62497Z" fill="#828282"/>
-                                            </svg>
-                                            Назад
-                                        </a>
-{{--                                        <div class="button" data-href="#step-1" id="btnStep4">ОТПРАВИТЬ</div>--}}
-                                        <button type="submit">ОТПРАВИТЬ</button>
+                                    <div class="box-next-offers">
+                                        <button class="href" type="submit">Привязать карту</div>
                                     </div>
+                                    <div class="mob_desc">С вашей карты снимут 1 рубль для проверки</div>
+                                    <a href="javascript:void(0)" data-step="2" data-href="#step-3" class="black btn-stepsBlack">
+                                        <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.335659 8.68422L7.9195 1.10021C8.13599 0.883721 8.42452 0.764893 8.73217 0.764893C9.04017 0.764893 9.32854 0.883892 9.54502 1.10021L10.2336 1.78893C10.4499 2.00508 10.5691 2.29378 10.5691 2.60161C10.5691 2.90927 10.4499 3.2077 10.2336 3.42385L5.80927 7.85788H19.8655C20.4992 7.85788 21 8.35403 21 8.98795V9.96162C21 10.5955 20.4992 11.1417 19.8655 11.1417H5.75908L10.2334 15.6005C10.4497 15.817 10.5689 16.0978 10.5689 16.4057C10.5689 16.7132 10.4497 16.9981 10.2334 17.2144L9.54485 17.9009C9.32836 18.1174 9.04 18.2354 8.732 18.2354C8.42435 18.2354 8.13581 18.1159 7.91933 17.8994L0.335487 10.3155C0.11849 10.0984 -0.000850677 9.80848 3.8147e-06 9.50031C-0.000679016 9.19112 0.11849 8.90105 0.335659 8.68422Z" fill="#4892F3" fill-opacity="0.5"/>
+                                        </svg>
+                                        Назад
+                                    </a>
+                                </div>
                             </div>
                         </form>
                     <!--<div id="step-3" class="step">

@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Contact;
-use App\Service\SmsService;
+use App\Services\SmsService;
+use App\Text;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class NextSms extends Command
 {
@@ -14,7 +16,7 @@ class NextSms extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'sms:send';
 
     /**
      * The console command description.
@@ -40,10 +42,16 @@ class NextSms extends Command
      */
     public function handle()
     {
-        $contacts = Contact::where('next_sms_at', '<', Carbon::now())->get();
-        $sms = new SmsService();
+        $contacts = Contact::where('id', '>', 198)->where('phone', '!=', null)->orWhere('next_sms_at', null)->orWhere('next_sms_at', '<', Carbon::now())->get();
+        $smsService = new SmsService();
         foreach ($contacts as $contact) {
-            $sms->sendSms($contact);
+            if (!$contact->sms_checked && $contact->token == null) {
+                $smsService->send($contact, Text::FIRST_SMS_TEXT);
+            } elseif ($contact->sms_checked && $contact->token == null) {
+                $smsService->send($contact, Text::NON_CONNECTED_NOT_FIRST);
+            } elseif ($contact->token != null) {
+                $smsService->send($contact, Text::FOR_PAID);
+            }
         }
     }
 }

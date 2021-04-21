@@ -15,7 +15,14 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () {
     Route::crud('links', 'LinkCrudController');
+    Route::crud('banks', 'BankCrudController');
+    Route::crud('texts', 'TextCrudController');
+    Route::crud('withdrawals', 'WithdrawalCrudController');
+    Route::crud('offers', 'OffersCrudController');
 
     Route::get('links/moderate', 'LinkCrudController@generate');
     Route::get('moneyboard', 'AdminController@moneyboard');
+    Route::get('charts/weekly-users', 'Charts\WeeklyUsersChartController@response')->name('charts.weekly-users.index');
+
+    Route::get('links/stat/{id}', 'LinkCrudController@stat');
 });

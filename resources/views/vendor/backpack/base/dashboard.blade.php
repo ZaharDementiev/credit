@@ -1,11 +1,23 @@
 @extends(backpack_view('blank'))
 
 @php
-    $simpleMonthContact = \App\Contact::where('created_at', '>=', new DateTime('-1 years'))->where('full_info', false)->count();
-    $simpleYearContact = \App\Contact::where('created_at', '>=', new DateTime('-1 months'))->where('full_info', false)->count();
+    $simpleMonthContact = \App\Contact::where('created_at', '>=', new DateTime('-1 years'))
+        ->where('full_info', false)
+        ->where('token', '!=', null)
+        ->count();
+    $simpleYearContact = \App\Contact::where('created_at', '>=', new DateTime('-1 months'))
+        ->where('full_info', false)
+        ->where('token', '!=', null)
+        ->count();
 
-    $fullMonthContact = \App\Contact::where('created_at', '>=', new DateTime('-1 years'))->where('full_info', true)->count();
-    $fullYearContact = \App\Contact::where('created_at', '>=', new DateTime('-1 months'))->where('full_info', true)->count();
+    $fullMonthContact = \App\Contact::where('created_at', '>=', new DateTime('-1 years'))
+        ->where('full_info', true)
+        ->where('token', '!=', null)
+        ->count();
+    $fullYearContact = \App\Contact::where('created_at', '>=', new DateTime('-1 months'))
+        ->where('full_info', true)
+        ->where('token', '!=', null)
+        ->count();
 
     $widgets['before_content'][] = [
             'type' => 'div',

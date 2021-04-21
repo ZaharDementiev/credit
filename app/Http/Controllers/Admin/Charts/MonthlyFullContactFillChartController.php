@@ -22,6 +22,7 @@ class MonthlyFullContactFillChartController extends ChartController
                 Carbon::now()->subDays(self::MONTH - $i)->endOfDay(),
             ])
                 ->where('full_info', true)
+                ->where('token', '!=', null)
                 ->count());
             $days->push(Carbon::now()->subDays(self::MONTH - $i)->format('d.m.y'));
         }

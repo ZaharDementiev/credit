@@ -14,7 +14,7 @@ class User extends Authenticatable
     use HasRoles;
     use CrudTrait;
 
-    public const SUBSCRIBE_SUM = 399;
+    public const SUBSCRIBE_SUM = 398;
     public const TO_DEBT = 100;
 
     /**
